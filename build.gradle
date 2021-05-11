@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'life'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13'
+    testRuntimeOnly 'junit:junit:4.13'
+}
+
+test {
+    useJUnit()
+
+    maxHeapSize = '1G'
+}
