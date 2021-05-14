@@ -6,7 +6,7 @@ import org.junit.Test;
 public class MainTest {
     @Test
     public void testSum() {
-        Assert.assertEquals(4, Main.sum(2, 2));
+        Assert.assertEquals(5, Main.sum(3, 2));
     }
 
     @Test
