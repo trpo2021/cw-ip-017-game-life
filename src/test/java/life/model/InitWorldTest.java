@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class InitWorldTest {
     public static double inaccuracyValue = 0.05;
 
-  @Test
+    @Test
     public void testIncorrectWidth() {
         Throwable exception = assertThrows(IllegalArgumentException.class,
                                            () -> new Life(-5, 20, 0.5));
@@ -65,9 +65,9 @@ public class InitWorldTest {
         int height = 100;
         int allCells = width * height;
 
-      Life life = new Life(width, height, alivePercent);
+        Life life = new Life(width, height, alivePercent);
 
-      System.out.println(life.getAliveCount());
+        System.out.println(life.getAliveCount());
 
         return life.getAliveCount() >
             allCells * (alivePercent - inaccuracyValue) &&
