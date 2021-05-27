@@ -34,7 +34,7 @@ public class Life {
     return aliveCount;
   }
 
-  public boolean isAlive(int x, int y) {
+  public boolean isAlive(int y, int x) {
     return currentGeneration[y][x];
   }
 
