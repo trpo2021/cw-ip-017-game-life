@@ -34,17 +34,21 @@ public class Life {
     return aliveCount;
   }
 
+  public int getGenerationCount() {
+    return generationCount;
+  }
+
   public boolean isAlive(int y, int x) {
     return currentGeneration[y][x];
   }
 
   private void initWorld(double alivePercent) {
-    currentGeneration = new boolean[this.height][this.width];
-    previousGeneration = new boolean[this.height][this.width];
+    currentGeneration = new boolean[height][width];
+    previousGeneration = new boolean[height][width];
     generationCount = 1;
 
-    for (int i = 0; i < this.height; i++) {
-      for (int j = 0; j < this.width; j++) {
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         boolean isAlive = Math.random() < alivePercent;
         previousGeneration[i][j] = isAlive;
         currentGeneration[i][j] = isAlive;
@@ -54,5 +58,64 @@ public class Life {
         }
       }
     }
+  }
+
+  public void nextGeneration() {
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        previousGeneration[i][j] = currentGeneration[i][j];
+      }
+    }
+
+    generationCount++;
+    aliveCount = 0;
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        int aliveNeighboursCount = aliveNeighboursCount(i, j);
+
+        if (previousGeneration[i][j]) {
+          currentGeneration[i][j] = aliveNeighboursCount >= 2 && aliveNeighboursCount <= 3;
+        } else {
+          currentGeneration[i][j] = aliveNeighboursCount == 3;
+        }
+
+        if (currentGeneration[i][j]) {
+          aliveCount++;
+        }
+      }
+    }
+  }
+
+  private int aliveNeighboursCount(int xCoordinate, int yCoordinate) {
+    int count = 0;
+
+    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
+      int x = i;
+      if (x < 0) {
+        x += width;
+      } else if (x >= width) {
+        x -= width;
+      }
+
+      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
+        if (i == xCoordinate && j == yCoordinate) {
+          continue;
+        }
+
+        int y = j;
+        if (y < 0) {
+          y += height;
+        } else if (y >= height) {
+          y -= height;
+        }
+
+        if (previousGeneration[x][y]) {
+          count++;
+        }
+      }
+    }
+
+    return count;
   }
 }
