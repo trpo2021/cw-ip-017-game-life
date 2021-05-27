@@ -22,6 +22,18 @@ public class Life {
     initWorld(alivePercent);
   }
 
+  public Life(boolean[][] generation) {
+    this.width = generation[0].length;
+    this.height = generation.length;
+
+    currentGeneration = new boolean[height][width];
+    previousGeneration = new boolean[height][width];
+    for (int i = 0; i < height; i++) {
+      System.arraycopy(generation[i], 0, previousGeneration[i], 0, width);
+      System.arraycopy(generation[i], 0, currentGeneration[i], 0, width);
+    }
+  }
+
   public int getWidth() {
     return width;
   }
@@ -62,9 +74,7 @@ public class Life {
 
   public void nextGeneration() {
     for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        previousGeneration[i][j] = currentGeneration[i][j];
-      }
+      System.arraycopy(currentGeneration[i], 0, previousGeneration[i], 0, width);
     }
 
     generationCount++;
