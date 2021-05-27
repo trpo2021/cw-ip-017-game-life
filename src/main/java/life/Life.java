@@ -10,13 +10,11 @@ public class Life {
 
     public Life(int width, int height, double alivePercent) {
         if (height <= 0 || width <= 0) {
-            throw new IllegalArgumentException(
-                "height and width should be more than zero");
+            throw new IllegalArgumentException("height and width should be more than zero");
         }
 
         if (alivePercent < 0 || alivePercent > 1) {
-            throw new IllegalArgumentException(
-                "alivePercent should be from 0 to 1");
+            throw new IllegalArgumentException("alivePercent should be from 0 to 1");
         }
 
         this.height = height;
@@ -24,13 +22,21 @@ public class Life {
         initWorld(alivePercent);
     }
 
-    public int getWidth() { return width; }
+    public int getWidth() {
+        return width;
+    }
 
-    public int getHeight() { return height; }
+    public int getHeight() {
+        return height;
+    }
 
-    public int getAliveCount() { return aliveCount; }
+    public int getAliveCount() {
+        return aliveCount;
+    }
 
-    public boolean isAlive(int x, int y) { return currentGeneration[y][x]; }
+    public boolean isAlive(int x, int y) {
+        return currentGeneration[y][x];
+    }
 
     private void initWorld(double alivePercent) {
         currentGeneration = new boolean[this.height][this.width];

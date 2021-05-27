@@ -10,34 +10,30 @@ public class InitWorldTest {
 
     @Test
     public void testIncorrectWidth() {
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                                           () -> new Life(-5, 20, 0.5));
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Life(-5, 20, 0.5));
         assertEquals("height and width should be more than zero",
-                     exception.getMessage());
+                exception.getMessage());
     }
 
     @Test
     public void testIncorrectHeight() {
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                                           () -> new Life(50, -5, 0.5));
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Life(50, -5, 0.5));
         assertEquals("height and width should be more than zero",
-                     exception.getMessage());
+                exception.getMessage());
     }
 
     @Test
     public void testIncorrectAlivePercentLessZero() {
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                                           () -> new Life(40, 20, -1));
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Life(40, 20, -1));
         assertEquals("alivePercent should be from 0 to 1",
-                     exception.getMessage());
+                exception.getMessage());
     }
 
     @Test
     public void testIncorrectAlivePercentMoreOne() {
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                                           () -> new Life(40, 20, 2));
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> new Life(40, 20, 2));
         assertEquals("alivePercent should be from 0 to 1",
-                     exception.getMessage());
+                exception.getMessage());
     }
 
     @Test
@@ -70,7 +66,7 @@ public class InitWorldTest {
         System.out.println(life.getAliveCount());
 
         return life.getAliveCount() >
-            allCells * (alivePercent - inaccuracyValue) &&
-            life.getAliveCount() < allCells * (alivePercent + inaccuracyValue);
+                allCells * (alivePercent - inaccuracyValue) &&
+                life.getAliveCount() < allCells * (alivePercent + inaccuracyValue);
     }
 }
