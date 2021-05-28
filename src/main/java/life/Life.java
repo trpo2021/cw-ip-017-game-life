@@ -97,7 +97,7 @@ public class Life {
     }
   }
 
-  private int aliveNeighboursCount(int xCoordinate, int yCoordinate) {
+  private int aliveNeighboursCount(int yCoordinate, int xCoordinate) {
     int count = 0;
 
     for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
@@ -120,7 +120,7 @@ public class Life {
           y -= height;
         }
 
-        if (previousGeneration[x][y]) {
+        if (previousGeneration[y][x]) {
           count++;
         }
       }
