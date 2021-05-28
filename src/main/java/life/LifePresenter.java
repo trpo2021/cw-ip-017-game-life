@@ -16,7 +16,7 @@ public class LifePresenter {
       clearScreen();
       showField();
 
-      try{
+      try {
         Thread.sleep(delay);
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -40,12 +40,12 @@ public class LifePresenter {
     }
   }
 
-  public void clearScreen(){
+  public void clearScreen() {
     try {
       if (System.getProperty("os.name").contains("Windows"))
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-      else
-        Runtime.getRuntime().exec("clear");
-    } catch (IOException | InterruptedException ignored) {}
+      else Runtime.getRuntime().exec("clear");
+    } catch (IOException | InterruptedException ignored) {
+    }
   }
 }
