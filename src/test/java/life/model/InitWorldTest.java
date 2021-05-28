@@ -59,8 +59,6 @@ public class InitWorldTest {
 
     Life life = new Life(width, height, alivePercent);
 
-    System.out.println(life.getAliveCount());
-
     return life.getAliveCount() > allCells * (alivePercent - inaccuracyValue)
         && life.getAliveCount() < allCells * (alivePercent + inaccuracyValue);
   }
