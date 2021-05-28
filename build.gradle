@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'life'
-version '1.0-SNAPSHOT'
+version '0.1'
 
 repositories {
     mavenCentral()
@@ -18,4 +18,15 @@ test {
     useJUnit()
 
     maxHeapSize = '1G'
+}
+
+jar {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+    manifest {
+        attributes(
+                'Main-Class': 'life.Main',
+                'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+        )
+    }
 }

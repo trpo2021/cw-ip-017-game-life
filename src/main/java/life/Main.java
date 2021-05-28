@@ -2,11 +2,9 @@ package life;
 
 public class Main {
   public static void main(String[] args) {
-    Life life = new Life(6, 10, 0.10);
-    LifePresenter presenter = new LifePresenter(life);
+    Life life = new Life(100, 10, 0.10);
+    LifePresenter presenter = new LifePresenter(life, 500L);
 
-    presenter.showField();
-    life.nextGeneration();
-    presenter.showField();
+    presenter.run();
   }
 }
