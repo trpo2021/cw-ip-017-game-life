@@ -5,8 +5,10 @@ public class Life {
   private final int height;
   private boolean[][] currentGeneration;
   private boolean[][] previousGeneration;
+  private boolean[][] prePreviousGeneration;
   private int generationCount;
   private int aliveCount;
+  private boolean isGameOver = false;
 
   public Life(int width, int height, double alivePercent) {
     if (height <= 0 || width <= 0) {
@@ -28,9 +30,20 @@ public class Life {
 
     currentGeneration = new boolean[height][width];
     previousGeneration = new boolean[height][width];
+    prePreviousGeneration = new boolean[height][width];
+
     for (int i = 0; i < height; i++) {
       System.arraycopy(generation[i], 0, previousGeneration[i], 0, width);
       System.arraycopy(generation[i], 0, currentGeneration[i], 0, width);
+    }
+
+    generationCount = 1;
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        if (currentGeneration[i][j]) {
+          aliveCount++;
+        }
+      }
     }
   }
 
@@ -54,9 +67,14 @@ public class Life {
     return currentGeneration[y][x];
   }
 
+  public boolean isGameOver() {
+    return isGameOver;
+  }
+
   private void initWorld(double alivePercent) {
     currentGeneration = new boolean[height][width];
     previousGeneration = new boolean[height][width];
+    prePreviousGeneration = new boolean[height][width];
     generationCount = 1;
 
     for (int i = 0; i < height; i++) {
@@ -73,6 +91,10 @@ public class Life {
   }
 
   public void nextGeneration() {
+    for (int i = 0; i < height; i++) {
+      System.arraycopy(previousGeneration[i], 0, prePreviousGeneration[i], 0, width);
+    }
+
     for (int i = 0; i < height; i++) {
       System.arraycopy(currentGeneration[i], 0, previousGeneration[i], 0, width);
     }
@@ -95,6 +117,8 @@ public class Life {
         }
       }
     }
+
+    checkGameOver();
   }
 
   private int aliveNeighboursCount(int yCoordinate, int xCoordinate) {
@@ -127,5 +151,32 @@ public class Life {
     }
 
     return count;
+  }
+
+  private void checkGameOver() {
+    if (aliveCount == 0) {
+      isGameOver = true;
+      return;
+    }
+
+    if (compareTwoGeneration(currentGeneration, previousGeneration)) {
+      isGameOver = true;
+      return;
+    }
+
+    if (compareTwoGeneration(currentGeneration, prePreviousGeneration)) {
+      isGameOver = true;
+    }
+  }
+
+  private boolean compareTwoGeneration(boolean[][] first, boolean[][] second) {
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        if (first[i][j] != second[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
