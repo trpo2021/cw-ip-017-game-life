@@ -159,14 +159,9 @@ public class Life {
       return;
     }
 
-    if (compareTwoGeneration(currentGeneration, previousGeneration)) {
-      isGameOver = true;
-      return;
-    }
-
-    if (compareTwoGeneration(currentGeneration, prePreviousGeneration)) {
-      isGameOver = true;
-    }
+    isGameOver =
+        compareTwoGeneration(currentGeneration, previousGeneration)
+            || compareTwoGeneration(currentGeneration, prePreviousGeneration);
   }
 
   private boolean compareTwoGeneration(boolean[][] first, boolean[][] second) {
