@@ -23,6 +23,11 @@ public class LifePresenter {
         break;
       }
 
+      if (life.isGameOver()) {
+        System.out.printf("Game over on %d generation\n", life.getGenerationCount());
+        break;
+      }
+
       life.nextGeneration();
     }
   }
@@ -44,7 +49,8 @@ public class LifePresenter {
     try {
       if (System.getProperty("os.name").contains("Windows"))
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-      else Runtime.getRuntime().exec("clear");
+      // else Runtime.getRuntime().exec("clear");
+      else System.out.print("\033[H\033[2J");
     } catch (IOException | InterruptedException ignored) {
     }
   }
