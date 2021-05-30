@@ -44,7 +44,6 @@ public class ArgumentsParserTest {
     assertThrows(IllegalArgumentException.class, () -> getSettings(args));
   }
 
-
   @Test
   public void parseBadValueHeightTest() {
     String[] args = "--height -400".split(" ");
@@ -75,7 +74,7 @@ public class ArgumentsParserTest {
     String[] args = "--alivePercent 50".split(" ");
     Settings settings = getSettings(args);
     double epsilon = 0.00001;
-    assertTrue(Math.abs(0.5 - settings.alivePercent) < epsilon );
+    assertTrue(Math.abs(0.5 - settings.alivePercent) < epsilon);
   }
 
   @Test
@@ -95,5 +94,4 @@ public class ArgumentsParserTest {
     String[] args = "--alivePercent -50".split(" ");
     assertThrows(IllegalArgumentException.class, () -> getSettings(args));
   }
-
 }
