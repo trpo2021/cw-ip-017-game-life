@@ -2,8 +2,11 @@ package life;
 
 public class Main {
   public static void main(String[] args) {
-    Life life = new Life(100, 10, 0.10);
-    LifePresenter presenter = new LifePresenter(life, 500L);
+    ArgumentsParser parser = new ArgumentsParser(args);
+    Settings settings = parser.parse();
+
+    Life life = new Life(settings.width, settings.height, settings.alivePercent);
+    LifePresenter presenter = new LifePresenter(life, settings.speed);
 
     presenter.run();
   }
